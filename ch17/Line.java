@@ -1,0 +1,35 @@
+package gr.aueb.cf.oop.ch17;
+
+import java.io.Serializable;
+
+public class Line extends AbstractShape implements ILine, Cloneable, Serializable {
+    private static final long serialVersionUID = 1L;
+    private double length;
+
+    public Line() {}
+
+    public Line(Line line) {
+        this.length = line.length;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Line line = (Line) o;
+
+        return Double.compare(line.length, length) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        long temp = Double.doubleToLongBits(length);
+        return (int) (temp ^ (temp >>> 32));
+    }
+
+    @Override
+    protected Line clone() throws CloneNotSupportedException {
+        return (Line) super.clone();
+    }
+}
